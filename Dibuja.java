@@ -55,17 +55,8 @@ class MiPanel extends JPanel{
 		 for (int i = 0; i < logitud; i++) {
 		     g.fillOval(50 - i * pasos, -16 - i * pasos, i * pasos * 2, i * pasos * 2);
 		 }
-		 
-		 
-		 //Calle
-		 Color gris_calle = new Color(167,168,170);
-		 Color gris_calle_sombra = new Color(146,147,149);
-		 GradientPaint color_calle = new GradientPaint(500, 680, gris_calle_sombra, 500, 710, gris_calle);
-		 g2d.setPaint(color_calle);
-		 g2d.fillRect(0, 680, getWidth(), 220);
-		 
-		 
-		 //Pared de fondo
+                 
+                 //Pared de fondo
 		 Color pared_base = new Color(245,100,28);
 		 Color pared_base_sombra = new Color(200,180,164);
 		 GradientPaint color_pared_base = new GradientPaint(500, 360, pared_base, 500, 560, pared_base_sombra);
@@ -83,7 +74,7 @@ class MiPanel extends JPanel{
 		 int separacion_horizontal = 4;
 		 int contador = 1;
 		
-		 //Añade ladrillos barda
+		 //Añade tablas a la pared
 		 for(int i = 0; i < 26; i++) {
 			 
 			 for (int j = 0; j < 16; j++) {
@@ -115,5 +106,32 @@ class MiPanel extends JPanel{
 			}
 			 
 		 }
+                 
+                 //Techo base del edificio 
+                 int x[]={100,180,280};
+                 int y[]={100,20,100};
+                 Color techo = new Color(114, 102, 88);
+                 g.setColor(techo);
+                 g.fillPolygon(x,y,3);
+                 
+		 //Base del edificio 
+                 Color base = new Color(185,190,193);
+                 g2d.setPaint(base);
+                 g2d.fillRect(40, 550, 546, 300 );
+                 
+                 //
+		 
+		 //Banqueta
+		 Color gris_calle = new Color(167,168,170);
+		 Color gris_calle_sombra = new Color(146,147,149);
+		 g2d.setPaint(gris_calle);
+		 g2d.fillRect(0, 580, getWidth(), 220);
+                 
+                 //Calle negra
+                 g2d.setPaint(gris_calle_sombra);
+                 g2d.fillRect(0, 595, getWidth(), 220);
+                
+		 
+		 
         }
 }
