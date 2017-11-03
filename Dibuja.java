@@ -1,0 +1,119 @@
+package dibuja;
+
+
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Dibuja {
+	
+	public static void main( String[] args ){
+		JFrame frame = new JFrame( "José Carlos Flores Morán" );
+		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+
+		MiPanel panel = new MiPanel();
+		frame.add( panel );
+		
+		frame.setSize( 626, 626 );		
+ 
+		frame.setLocationRelativeTo(null);
+		frame.setVisible( true );
+		frame.setResizable(false);
+		
+	}
+	
+}
+
+class MiPanel extends JPanel{
+
+        @Override
+	public void paintComponent (Graphics g){
+		
+		 super.paintComponent(g);
+		 
+		 Graphics2D g2d = (Graphics2D) g;
+		 
+		 //Cielo
+		 Color azulbase = new Color(118, 199, 255);
+		 Color azulclaro = new Color(255,255,255,60);
+		 GradientPaint verticalGradient = new GradientPaint(500, 0, azulbase, 500, 300, azulclaro);
+		 g2d.setPaint(verticalGradient);
+		 g2d.fillRect(0, 0, getWidth(), 360);
+
+		 //Sol
+		 g2d.setPaint(azulclaro);
+		 g2d.fillOval(1, -40, 90, 90);
+		 
+		 //Resplandor del sol
+		 int pasos = 4;
+		 int logitud = (120 / pasos);
+		 g2d.setPaint(new Color(255,255,255,25));
+		 for (int i = 0; i < logitud; i++) {
+		     g.fillOval(50 - i * pasos, -16 - i * pasos, i * pasos * 2, i * pasos * 2);
+		 }
+		 
+		 
+		 //Calle
+		 Color gris_calle = new Color(167,168,170);
+		 Color gris_calle_sombra = new Color(146,147,149);
+		 GradientPaint color_calle = new GradientPaint(500, 680, gris_calle_sombra, 500, 710, gris_calle);
+		 g2d.setPaint(color_calle);
+		 g2d.fillRect(0, 680, getWidth(), 220);
+		 
+		 
+		 //Pared de fondo
+		 Color pared_base = new Color(245,100,28);
+		 Color pared_base_sombra = new Color(200,180,164);
+		 GradientPaint color_pared_base = new GradientPaint(500, 360, pared_base, 500, 560, pared_base_sombra);
+		 g2d.setPaint(color_pared_base);
+		 g2d.fillRect(50, 370, 526 , 180);
+		 //Pared largo: 1419
+		 //Pared ancho: 190
+		 
+		 //Ladrillos de pared
+		 Color ladrillo_pared_1 = new Color(225,98,8);
+		 Color ladrillo_pared_2 = new Color(255,120,48);
+		 Color ladrillo_pared_3 = new Color(245,90,38);
+		 
+		 int ancho_ladrillo = (210 / 17);
+		 int separacion_horizontal = 4;
+		 int contador = 1;
+		
+		 //Añade ladrillos barda
+		 for(int i = 0; i < 26; i++) {
+			 
+			 for (int j = 0; j < 16; j++) {
+				
+				int posicion_ladrillo_ancho = (210 / 17)*j;
+				
+                             switch (contador) {
+                                 case 1:
+                                     g2d.setPaint(ladrillo_pared_1);
+                                     contador = 2;
+                                     break;
+                                 case 2:
+                                     g2d.setPaint(ladrillo_pared_2);
+                                     contador = 3;
+                                     break;
+                                 case 3:
+                                     g2d.setPaint(ladrillo_pared_3);
+                                     contador = 1;
+                                     break;
+                                 default:
+                                     break;
+                             }
+				
+				
+				
+				
+				g2d.fillRect(50, 370 + posicion_ladrillo_ancho + separacion_horizontal, 526, ancho_ladrillo-2);
+				
+			}
+			 
+		 }
+        }
+}
