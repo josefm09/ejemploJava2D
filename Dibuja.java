@@ -40,6 +40,9 @@ class MiPanel extends JPanel{
 		 //Cielo
 		 Color azulbase = new Color(118, 199, 255);
 		 Color azulclaro = new Color(255,255,255,60);
+                 Color azulito = new Color(170, 240, 240);
+                 g2d.setPaint(azulito);
+                 g2d.fillRect(0, 0, getWidth(), getHeight());
 		 GradientPaint verticalGradient = new GradientPaint(500, 0, azulbase, 500, 300, azulclaro);
 		 g2d.setPaint(verticalGradient);
 		 g2d.fillRect(0, 0, getWidth(), 360);
@@ -61,7 +64,7 @@ class MiPanel extends JPanel{
 		 Color pared_base_sombra = new Color(200,180,164);
 		 GradientPaint color_pared_base = new GradientPaint(500, 360, pared_base, 500, 560, pared_base_sombra);
 		 g2d.setPaint(color_pared_base);
-		 g2d.fillRect(50, 370, 526 , 180);
+		 g2d.fillRect(50, 382, 526 , 180);
 		 //Pared largo: 1419
 		 //Pared ancho: 190
 		 
@@ -101,25 +104,37 @@ class MiPanel extends JPanel{
 				
 				
 				
-				g2d.fillRect(50, 370 + posicion_ladrillo_ancho + separacion_horizontal, 526, ancho_ladrillo-2);
+				g2d.fillRect(50, 382 + posicion_ladrillo_ancho + separacion_horizontal, 526, ancho_ladrillo-2);
+                                //g2d.fillRect(240, 382 + posicion_ladrillo_ancho + separacion_horizontal, 146, ancho_ladrillo-2);
 				
 			}
 			 
 		 }
                  
+                 //Separacion del techo
+                 Color separacion = new Color(251, 148, 53);
+                 g2d.setPaint(separacion);
+                 g2d.fillRect(45, 390, 536, 15);
+                 
                  //Techo base del edificio 
-                 int x[]={100,180,280};
-                 int y[]={100,20,100};
+                 int x[]={30,100,526,596};
+                 int y[]={396,345,345,396};
                  Color techo = new Color(114, 102, 88);
                  g.setColor(techo);
-                 g.fillPolygon(x,y,3);
+                 g.fillPolygon(x,y,4);
                  
 		 //Base del edificio 
                  Color base = new Color(185,190,193);
+                 Color base_blanca = new Color(242, 223, 224);
                  g2d.setPaint(base);
                  g2d.fillRect(40, 550, 546, 300 );
+                 g2d.setPaint(base_blanca);
+                 g2d.fillRect(40, 550, 546, 5);
                  
-                 //
+                 //Sombra del cuadro frontal
+                 Color sombra_cuadro = new Color(0, 0, 0, 80);
+                 g2d.setPaint(sombra_cuadro);
+                 g2d.fillRect(230, 405, 166, 145);
 		 
 		 //Banqueta
 		 Color gris_calle = new Color(167,168,170);
