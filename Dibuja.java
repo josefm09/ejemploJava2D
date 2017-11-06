@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -59,6 +60,11 @@ class MiPanel extends JPanel{
 		     g.fillOval(50 - i * pasos, -16 - i * pasos, i * pasos * 2, i * pasos * 2);
 		 }
                  
+                 //Nubes
+                 dibuja_nubes(g,280,100);
+                 dibuja_nubes(g,50,200);
+                 dibuja_nubes(g,350,250);
+                 
                  //Pared de fondo
 		 Color pared_base = new Color(245,100,28);
 		 Color pared_base_sombra = new Color(200,180,164);
@@ -68,12 +74,12 @@ class MiPanel extends JPanel{
 		 //Pared largo: 1419
 		 //Pared ancho: 190
 		 
-		 //Ladrillos de pared
-		 Color ladrillo_pared_1 = new Color(225,98,8);
-		 Color ladrillo_pared_2 = new Color(255,120,48);
-		 Color ladrillo_pared_3 = new Color(245,90,38);
+		 //tablas de pared
+		 Color tabla_pared_1 = new Color(225,98,8);
+		 Color tabla_pared_2 = new Color(255,120,48);
+		 Color tabla_pared_3 = new Color(245,90,38);
 		 
-		 int ancho_ladrillo = (210 / 17);
+		 int ancho_tabla = (210 / 17);
 		 int separacion_horizontal = 4;
 		 int contador = 1;
 		
@@ -82,19 +88,19 @@ class MiPanel extends JPanel{
 			 
 			 for (int j = 0; j < 16; j++) {
 				
-				int posicion_ladrillo_ancho = (210 / 17)*j;
+				int posicion_tabla_ancho = (210 / 17)*j;
 				
                              switch (contador) {
                                  case 1:
-                                     g2d.setPaint(ladrillo_pared_1);
+                                     g2d.setPaint(tabla_pared_1);
                                      contador = 2;
                                      break;
                                  case 2:
-                                     g2d.setPaint(ladrillo_pared_2);
+                                     g2d.setPaint(tabla_pared_2);
                                      contador = 3;
                                      break;
                                  case 3:
-                                     g2d.setPaint(ladrillo_pared_3);
+                                     g2d.setPaint(tabla_pared_3);
                                      contador = 1;
                                      break;
                                  default:
@@ -104,8 +110,8 @@ class MiPanel extends JPanel{
 				
 				
 				
-				g2d.fillRect(50, 382 + posicion_ladrillo_ancho + separacion_horizontal, 526, ancho_ladrillo-2);
-                                //g2d.fillRect(240, 382 + posicion_ladrillo_ancho + separacion_horizontal, 146, ancho_ladrillo-2);
+				g2d.fillRect(50, 382 + posicion_tabla_ancho + separacion_horizontal, 526, ancho_tabla-2);
+                                //g2d.fillRect(240, 382 + posicion_tabla_ancho + separacion_horizontal, 146, ancho_tabla-2);
 				
 			}
 			 
@@ -152,23 +158,10 @@ class MiPanel extends JPanel{
                  g.fillPolygon(x3, y3, 3);
                  
                  //Base del relog
-                 int xcirc = 316;
-                 int ycirc = 316;
-                 int rcirc = 43;
-                 xcirc = xcirc-(rcirc/2);
-                 ycirc = ycirc-(rcirc/2);
-                 g.setColor(separacion);
-                 g.fillOval(xcirc,ycirc,rcirc,rcirc);
-                 
+                 dibuja_circulo(g,separacion,316,316,43);
                  
                  //Relog
-                 int xcirc2 = 316;
-                 int ycirc2 = 316;
-                 int rcirc2 = 30;
-                 xcirc2 = xcirc2-(rcirc2/2);
-                 ycirc2 = ycirc2-(rcirc2/2);
-                 g.setColor(Color.WHITE);
-                 g.fillOval(xcirc2,ycirc2,rcirc2,rcirc2);
+                 dibuja_circulo(g,Color.WHITE,316,316,30);
                  
                  //Manecillas
                  g2d.setPaint(Color.BLACK);
@@ -251,6 +244,8 @@ class MiPanel extends JPanel{
 		 g2d.setPaint(gris_calle);
 		 g2d.fillRect(0, 580, getWidth(), 220);
                  
+                 
+                 
                  //Calle negra
                  g2d.setPaint(gris_calle_sombra);
                  g2d.fillRect(0, 595, getWidth(), 220);
@@ -265,6 +260,26 @@ class MiPanel extends JPanel{
                  //Ventanas del lado derecho
                  dibuja_ventanas(g2d,406,417,4);
                  dibuja_ventanas(g2d,406,490,4);
+                 
+                 //Arbolitos
+                 Color verde_pino = new Color(68, 189, 89);
+                 Color tronco = new Color(172, 120, 74);
+                 g2d.setPaint(tronco);
+                 g2d.fillRect(45, 540, 13, 40);
+                 g2d.setPaint(tronco);
+                 g2d.fillRect(573, 540, 13, 40);
+                 
+                 //Triangulo del pino izquierdo
+                 int x4[]={20, 50, 80};
+                 int y4[]={545, 425, 545};
+                 g.setColor(verde_pino);
+                 g.fillPolygon(x4, y4, 3);
+                 
+                 //Triangulo del pino derecho
+                 int x5[]={548, 578, 608};
+                 int y5[]={545, 425, 545};
+                 g.setColor(verde_pino);
+                 g.fillPolygon(x5, y5, 3);
         }
         
         //Metodo para dibujar ventanas en serie 
@@ -287,5 +302,34 @@ class MiPanel extends JPanel{
                      ventana_x = ventana_x + 45;
                  }
         
+        }
+        
+        //Metodo para dibujar circulos
+        public void dibuja_circulo(Graphics g, Color color, int xcirc, int ycirc, int rcirc){
+             xcirc = xcirc-(rcirc/2);
+             ycirc = ycirc-(rcirc/2);
+             g.setColor(color);
+             g.fillOval(xcirc,ycirc,rcirc,rcirc);
+        }
+        
+        //Metodo para dibujar nubes
+        public void dibuja_nubes(Graphics g,int x,int y){
+            Random rand = new Random();
+            Color nube = new Color(250, 253, 253);
+            int r=50;
+
+            for (int i=0;i<=20;i++){
+                
+                if(r > 30 && r < 50 ){
+                    dibuja_circulo(g,nube,x,y,r);
+                    r = r - 20;
+                }else {
+                    dibuja_circulo(g,nube,x,y,r);
+                    r = r + 20;
+                }
+                r = rand.nextInt(100);
+                x=x+10;
+            }
+            
         }
 }
