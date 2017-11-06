@@ -140,6 +140,7 @@ class MiPanel extends JPanel{
                  g2d.setPaint(torre);
                  g2d.fillRect(277, 286, 81, 110);
                  
+                 
                  //Separacion de la torre
                  g2d.setPaint(separacion);
                  g2d.fillRect(267, 276, 101, 10);
@@ -223,11 +224,26 @@ class MiPanel extends JPanel{
                  g2d.setPaint(cuadro_frontal);
                  g2d.fillRect(240, 405, 156, 145);
                  
+                 //Puertas de vidrio
+                 Color ventana = new Color(106, 196, 228);
+                 g2d.setPaint(techo);
+                 g2d.fillRect(282, 490, 70, 60);
+                 g2d.setPaint(Color.BLACK);
+                 g2d.fillRect(316, 490, 1, 60);
+                 g2d.setPaint(ventana);
+                 g2d.fillRect(287, 495, 25, 35);
+                 g2d.setPaint(ventana);
+                 g2d.fillRect(287, 535, 25, 8);
+                 g2d.setPaint(ventana);
+                 g2d.fillRect(322, 495, 25, 35);
+                 g2d.setPaint(ventana);
+                 g2d.fillRect(322, 535, 25, 8);
+                 
                  //Separacion del primer piso
                  g2d.setPaint(base_blanca);
-                 g2d.fillRect(234, 465, 168, 5);
-                 g2d.setPaint(base);
                  g2d.fillRect(234, 470, 168, 5);
+                 g2d.setPaint(base);
+                 g2d.fillRect(234, 475, 168, 5);
 		 
 		 //Banqueta
 		 Color gris_calle = new Color(167,168,170);
@@ -239,7 +255,37 @@ class MiPanel extends JPanel{
                  g2d.setPaint(gris_calle_sombra);
                  g2d.fillRect(0, 595, getWidth(), 220);
                 
+		 //Ventanas del lado izquierdo
+                 dibuja_ventanas(g2d,65,417,4);
+                 dibuja_ventanas(g2d,65,490,4);
+                 
+                 //Ventanas del cuadro central
+                 dibuja_ventanas(g2d,255,417,3);
 		 
-		 
+                 //Ventanas del lado derecho
+                 dibuja_ventanas(g2d,406,417,4);
+                 dibuja_ventanas(g2d,406,490,4);
+        }
+        
+        //Metodo para dibujar ventanas en serie 
+        public void dibuja_ventanas(Graphics2D g2d,int marco_x, int marco_y, int n){
+            Color marco = new Color(248, 224, 210);
+            Color ventana = new Color(106, 196, 228);
+            
+            int ventana_x = marco_x + 5;
+            int ventana_y = marco_y + 5;
+            for(int j = 0; j<n; j++){
+                     
+                     g2d.setPaint(marco);
+                     g2d.fillRect(marco_x, marco_y, 30, 45);
+                     g2d.setPaint(ventana);
+                     g2d.fillRect(ventana_x, ventana_y, 20, 15);
+                     g2d.setPaint(ventana);
+                     g2d.fillRect(ventana_x, ventana_y+20, 20, 15);
+                     
+                     marco_x = marco_x + 45;
+                     ventana_x = ventana_x + 45;
+                 }
+        
         }
 }
